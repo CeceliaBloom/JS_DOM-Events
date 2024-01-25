@@ -1,47 +1,77 @@
-console.log("Script attached");
-/*----------- Exercise #1: SELECTING/MANIPULATING ELEMENTS -----------*/
+      //Exercise 1:
+const nod1 = document.getElementById("node1");
+nod1.textContent= `I used the getElementById(“node1”) method to access this`;
 
-// Select Node #1 and change the text to: "I used the getElementById("node1") method to access this"
+const nod2Elements = document.getElementsByClassName("node2");
+for (const nod2Element of nod2Elements) {
+  nod2Element.textContent = "I used the getElementByClassName('node2') method to access this";
+}
 
-// Select Node #2 and change the text to: "I used the getElementByClassName("node2") method to access this" */
+const h3Elements = document.getElementsByTagName("h3");
+for (const h3Element of h3Elements) {
+  h3Element.textContent = "I used the getElementByTagName('h3') method to access all of these";
+}
 
-// Select ALL the h3 tags and change the text to: "I used the getElementByTagName("h3") method to access all of these" */
+            // Exercise 2:
+const newParagraph = document.createElement("p");
 
-/*----------- Exercise #2: CREATING/APPENDING/INSERTING ELEMENTS/OBJECTS -----------*/
+newParagraph.textContent = "This node was created using the createElement() method";
 
-// TODO: Create a paragraph element using this document.createElement() and put this text inside "This node was created using the createElement() method"
+const parentNode = document.querySelector("#parent");
+parentNode.appendChild(newParagraph);
 
-// TODO: Append the created node to the parent node using the element.appendChild() method
+const anchorElement = document.createElement('a');
+anchorElement.textContent = "I am a <a> tag";
+anchorElement.href = "https://yourlinkurl.com";
 
-// TODO: Create a <a> element using this document.createElement() and put this text inside "I am a <a> tag"
+            // Exercise 3:
+parentNode.insertBefore(anchorElement, newParagraph);
 
-// BONUS: Add a link href to the <a>
+const exercise3contain = document.querySelector("#exercise-container3");
+const oldPara = document.querySelector("#N1");
 
-// TODO: Insert the created <a> in the parent but before the <p> you just created using the element.insertBefore() method
+const newParagraphElement = document.createElement("p");
+newParagraphElement.textContent = "New Child Node";
 
-/*----------- Exercise #3: REMOVING/REPLACING ELEMENTS/OBJECTS -----------*/
+exercise3contain.replaceChild(newParagraphElement, oldPara);
 
-// TODO: Replace the "Child Node" with a new <p> element that reads "New Child Node"
 
-// TODO: Remove the "New Child Node"
-
-/*----------- Exercise #4: LIST ITEMS ----------- */
-// Use the following array of values to generate a list on the DOM
-
+      //Exercise 4: 
+      //Use the following array of values to generate a list on the DOM
 let list = [ "apples", "bananas", "carrots", "dragon fruit", "eggplant", "fish", "grapes", "honey", "ice bag", "juice (any kind)" ];
 
+let ul= document.createElement("ul");
 
-// TODO: Create an unordered list element
+list.forEach((item)=>{
+  const li=document.createElement("li");
+  li.textContent=item;
 
-// TODO: Iterate over the array values, and create a list item element for each
+  ul.appendChild(li);
+});
+document.querySelector("#container").appendChild(ul);
 
-// TODO: Append the new list items to the unordered list element
-
-// TODO: Append the unordered list to the `div#container` under exercise 4 
-
-/*----------- Exercise #5: DOM EVENTS --------------*/
-
-// TODO: write a function called "show" which creates a new div with an alerting message to the user with this message
-// -> "Clicking the button triggers the onclick event, which calls the JS function show()... which alerts the user"
-// This div should be a 'modal' that covers the main content on the screen
-// BONUS: The modal popup should be able to be closed. Refactor for this functionality
+      //Exercise 5:
+function show() {
+  const modalContainer = document.createElement("div");
+  const modalCard = document.createElement("div");
+  const h2 = document.createElement("h2");
+  const p = document.createElement("p");
+  const closeBtn = document.createElement("button");
+          
+  h2.textContent = "modal header";
+  p.textContent = "modal content ....";
+  closeBtn.textContent = "close";
+          
+  closeBtn.addEventListener("click", () => {
+     document.body.removeChild(modalContainer);
+  });
+          
+   modalCard.appendChild(h2);
+   modalCard.appendChild(p);
+   modalCard.appendChild(closeBtn);
+   modalCard.classList.add("modal-card");modalContainer.id = "modal";
+   modalContainer.appendChild(modalCard);document.body.appendChild(modalContainer);
+}
+          
+const button = document.querySelector("#btn");
+button.addEventListener("click", show);
